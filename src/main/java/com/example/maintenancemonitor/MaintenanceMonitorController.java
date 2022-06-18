@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MaintenanceMonitorController {
     private String message;
+    private Website web = new Website();
     @RequestMapping("/")
     public String index(){
-        return "Hallo! Willkommen zum MaintenanceMonitor!";
+        return web.index();
     }
     @RequestMapping("/set")
     public String setMessage(@RequestParam String a){
-        message = a;
-        return String.format("Message set as: %s",message);
+        return message = a;
     }
     @RequestMapping("/send")
     public String sendMessage(){
@@ -25,7 +25,22 @@ public class MaintenanceMonitorController {
     public String resetMessage(){
         message = "";
         return "Message was reset";
+    }
 
+    @RequestMapping("/fine")
+    public void fine(){
+        message = setMessage("fine");
+    }
+
+    @RequestMapping("/bad")
+    public void bad(){
+        message = setMessage("bad");
+    }
+
+    @RequestMapping("/status")
+    public String status(){
+        if(message == "bad") return "red";
+        return "green";
     }
 }
 
