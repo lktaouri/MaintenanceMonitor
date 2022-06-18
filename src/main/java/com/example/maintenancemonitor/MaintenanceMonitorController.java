@@ -8,6 +8,6 @@ public class MaintenanceMonitorController {
 
     @RequestMapping("/")
     public String index(){
-        return "Willkommen zum MaintenanceMonitor!";
+        return "Hallo! Willkommen zum MaintenanceMonitor!";
     }
 }
