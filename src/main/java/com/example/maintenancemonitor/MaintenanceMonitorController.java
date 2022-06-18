@@ -16,8 +16,17 @@ public class MaintenanceMonitorController {
         message = a;
         return String.format("Message set as: %s",message);
     }
-    @RequestMapping("send")
+    @RequestMapping("/send")
     public String sendMessage(){
         return message;
     }
+
+    @RequestMapping("/reset")
+    public String resetMessage(){
+        message = "";
+        return "Message was reset";
+
+    }
 }
+
+
