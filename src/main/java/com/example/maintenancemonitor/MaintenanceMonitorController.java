@@ -6,42 +6,37 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MaintenanceMonitorController {
-    private String message;
+    private String message = "";
+
     private Website web = new Website();
     @RequestMapping("/")
     public String index(){
         return web.index();
     }
     @RequestMapping("/set")
-    public String setMessage(@RequestParam String a){
-        return message = a;
+    public String set(@RequestParam String a){
+        message = web.getMessage(a);
+        return String.format("Message set as: %s",message);
     }
     @RequestMapping("/send")
     public String sendMessage(){
-        return message;
+        if(web.getMessage(message).equals("")){
+            return "No message set";
+        }
+        return web.getMessage(message);
     }
 
     @RequestMapping("/reset")
     public String resetMessage(){
-        message = "";
-        return "Message was reset";
-    }
-
-    @RequestMapping("/fine")
-    public void fine(){
-        message = setMessage("fine");
-    }
-
-    @RequestMapping("/bad")
-    public void bad(){
-        message = setMessage("bad");
+        message = web.resetMessage();
+        return "Message was reset!";
     }
 
     @RequestMapping("/status")
     public String status(){
-        if(message == "bad") return "red";
-        return "green";
+        return web.status(message);
     }
+
 }
 
 
