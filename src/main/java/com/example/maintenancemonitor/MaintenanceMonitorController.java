@@ -20,9 +20,6 @@ public class MaintenanceMonitorController {
     }
     @RequestMapping("/send")
     public String sendMessage(){
-        if(web.getMessage(message).equals("")){
-            return "No message set";
-        }
         return web.getMessage(message);
     }
 

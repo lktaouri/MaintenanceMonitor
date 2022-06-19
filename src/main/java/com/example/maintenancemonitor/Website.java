@@ -1,28 +1,36 @@
 package com.example.maintenancemonitor;
 
-public class Website {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+public class Website {
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+    LocalDateTime now = LocalDateTime.now();
+    String time = String.format("%s CET",dtf.format(now));
 
     public String index(){
-        return "Hallo! Willkommen zum MaintenanceMonitor!";
+        return String.format("Hallo! Willkommen zum Maintenance Monitor!, %s",time);
     }
 
-    public String getMessage(String a) {
-        return a;
+    public String getMessage(String m) {
+        if(m.equals("")){
+            return String.format("No message was set, %s", time);
+        }
+        return String.format("%s, %s",m, time);
     }
 
     public String resetMessage(){
-        return " ";
+        return "";
     }
 
-    public String status(String message) {;
-        if ( message.equalsIgnoreCase("fine")) {
-            return "GREEN MONITOR";
-        } else if (message.equalsIgnoreCase("bad")) {
-            return "RED MONITOR";
+    public String status(String message) {
+        if ( message.equals(String.format("fine, %s",time))) {
+            return String.format("GREEN MONITOR, %s", time);
+        } else if (message.equals(String.format("bad, %s",time))) {
+            return String.format("RED MONITOR, %s", time);
         }
         else{
-            return "WHITE MONITOR";
+            return String.format("WHITE MONITOR, %s", time);
         }
     }
 }

@@ -9,22 +9,15 @@ class WebsiteTest {
     @Test
     void indexTest(){
         String a = ws.index();
-        String exp = "Hallo! Willkommen zum MaintenanceMonitor!";
+        String exp = String.format("Hallo! Willkommen zum Maintenance Monitor!, %s",ws.time);
         assertEquals(exp,a);
     }
 
 
     @Test
-    void setTest(){
+    void getTest(){
         String a = ws.getMessage("Hallo!");
-        String exp = "Hallo!";
-        assertEquals(exp,a);
-    }
-
-    @Test
-    void sendTest(){
-        String a = ws.getMessage("Bye!");
-        String exp = "Bye!";
+        String exp = String.format("Hallo!, %s",ws.time);
         assertEquals(exp,a);
     }
 
@@ -37,22 +30,22 @@ class WebsiteTest {
 
     @Test
     void statusTest1(){
-        String a = ws.status("finE");
-        String exp = "GREEN MONITOR";
+        String a = ws.status(String.format("fine, %s",ws.time));
+        String exp = String.format("GREEN MONITOR, %s", ws.time);
         assertEquals(exp,a);
     }
 
     @Test
     void statusTest2(){
-        String a = ws.status("bAd");
-        String exp = "RED MONITOR";
+        String a = ws.status(String.format("bad, %s",ws.time));
+        String exp = String.format("RED MONITOR, %s", ws.time);
         assertEquals(exp,a);
     }
 
     @Test
     void statusTest3(){
         String a = ws.status("test");
-        String exp = "WHITE MONITOR";
+        String exp = String.format("WHITE MONITOR, %s", ws.time);
         assertEquals(exp,a);
     }
 
